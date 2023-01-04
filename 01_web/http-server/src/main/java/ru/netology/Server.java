@@ -24,7 +24,7 @@ public class Server {
         try (final var serverSocket = new ServerSocket(socketNum)) {
             while (true) {
                 final var socket = serverSocket.accept();
-                threadPool.submit(() ->connect(socket));
+                threadPool.submit(() -> connect(socket));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,7 +61,7 @@ public class Server {
                 Thread.currentThread().interrupt();
             }
 
-            final var filePath = Path.of(".","public", path);
+            final var filePath = Path.of(".", "public", path);
             final var mimeType = Files.probeContentType(filePath);
 
             // special case for classic
