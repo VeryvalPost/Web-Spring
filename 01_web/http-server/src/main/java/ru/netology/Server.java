@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class Server {
     final List<String> validPaths = List.of("/index.html", "/spring.svg", "/spring.png", "/resources.html", "/styles.css", "/app.js", "/links.html", "/forms.html", "/classic.html", "/events.html", "/events.js");
@@ -50,6 +49,13 @@ public class Server {
             }
 
             final var path = parts[1];
+
+            System.out.println(Request.getQueryParam(path));
+
+            //Для обработки handler'а из п.3 задания
+            System.out.println(Request.getPathWithoutParam(path));
+
+
             if (!validPaths.contains(path)) {
                 out.write((
                         "HTTP/1.1 404 Not Found\r\n" +
