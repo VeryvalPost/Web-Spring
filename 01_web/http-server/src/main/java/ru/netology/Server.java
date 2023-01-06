@@ -50,8 +50,9 @@ public class Server {
 
             final var path = parts[1];
 
+
             // Тестовый запрос для демонстрации
-            Request request = new Request(parts);
+            Request request = new Request(new String[]{"GET", "/path.html?key=value1&key2=value2"});
 
             System.out.println(request.getMethod());
             System.out.println(request.getPath());
