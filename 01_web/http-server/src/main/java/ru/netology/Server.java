@@ -50,10 +50,13 @@ public class Server {
 
             final var path = parts[1];
 
-            System.out.println(Request.getQueryParam(path));
+            // Тестовый запрос для демонстрации
+            Request request = new Request(parts);
 
-            //Для обработки handler'а из п.3 задания
-            System.out.println(Request.getPathWithoutParam(path));
+            System.out.println(request.getMethod());
+            System.out.println(request.getPath());
+            System.out.println(request.getQueryParam("key2"));
+            System.out.println(request.getQueryParams());
 
 
             if (!validPaths.contains(path)) {
