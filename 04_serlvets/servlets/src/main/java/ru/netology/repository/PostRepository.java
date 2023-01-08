@@ -11,7 +11,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PostRepository {
 
     ConcurrentHashMap<Long, Post> repositoryPost = new ConcurrentHashMap<>();
-    AtomicLong mapIndex;
+    AtomicLong mapIndex = new AtomicLong();
+
 
     public ConcurrentHashMap<Long, Post> all() {
         return repositoryPost;
@@ -22,20 +23,29 @@ public class PostRepository {
     }
 
     public Post save(Post post) {
-
-        if (repositoryPost.containsKey(post.getId())) {
-            repositoryPost.put(post.getId(), post);
-        } else if (post.getId() == (mapIndex.get() + 1)) {
-            repositoryPost.put(post.getId(), post);
-            mapIndex.getAndIncrement();
-        } else if (post.getId() > mapIndex.get() + 1) {
-            repositoryPost.put(mapIndex.incrementAndGet(), post);
-            post.setId(mapIndex.get() + 1);
-            throw new NotFoundException("ID not found, Post#"+ post.getId() + " saved sucsessfully");
-        }  else if (post.getId() == 0 ){
-           Long id = mapIndex.incrementAndGet();
+        if (mapIndex.get() == 0) {
+            Long id = mapIndex.incrementAndGet();
             repositoryPost.put(id, post);
         }
+
+        if (mapIndex.get() != 0) {
+            if (repositoryPost.containsKey(post.getId())) {
+                repositoryPost.put(post.getId(), post);
+            }
+
+            if (post.getId() == (mapIndex.get() + 1)) {
+                repositoryPost.put(post.getId(), post);
+                mapIndex.getAndIncrement();
+            }
+
+            if (post.getId() > mapIndex.get() + 1) {
+                post.setId(mapIndex.incrementAndGet());
+                repositoryPost.put(mapIndex.get(), post);
+                throw new NotFoundException("ID not found, BUT your Post#" + post.getId() + " saved sucsessfully");
+            }
+        }
+
+
         return post;
     }
 
