@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MainServlet extends HttpServlet {
     private PostController controller;
     private static final String PATH = "/api/posts";
-
+    private static final String PATH_ID = "/api/posts\\d+";
     @Override
     public void init() {
         final var repository = new PostRepository();
@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
                 controller.all(resp);
                 return;
             }
-            if (method.equals("GET") && path.matches(PATH + "\\d+")) {
+            if (method.equals("GET") && path.matches(PATH_ID)) {
                 // easy way
                 final var id = idStrToLong(PATH);
                 controller.getById(id, resp);
@@ -41,7 +41,7 @@ public class MainServlet extends HttpServlet {
                 controller.save(req.getReader(), resp);
                 return;
             }
-            if (method.equals("DELETE") && path.matches(PATH + "\\d+")) {
+            if (method.equals("DELETE") && path.matches(PATH_ID)) {
                 // easy way
                 final var id = idStrToLong(PATH);
                 controller.removeById(id, resp);
