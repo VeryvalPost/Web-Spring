@@ -1,5 +1,5 @@
 package ru.netology.servlet;
-
+/*
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.netology.controller.PostController;
 import ru.netology.javaconfig.JavaConfig;
@@ -67,3 +67,4 @@ public class MainServlet extends HttpServlet {
 
 }
 
+*/

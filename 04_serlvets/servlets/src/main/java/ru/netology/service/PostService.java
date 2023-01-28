@@ -17,7 +17,7 @@ public class PostService {
         this.repository = repository;
     }
 
-    public ConcurrentHashMap<Long, Post> all() {
+    public List <Post> all() {
         return repository.all();
     }
 
@@ -29,7 +29,7 @@ public class PostService {
     }
 
     public void removeById(long id) {
-        if (repository.all().containsKey(id)) {
+        if (repository.all().contains(id)) {
             repository.removeById(id);
             System.out.println("Deleted post #" + id);
         } else System.out.println("Nothing to delete");

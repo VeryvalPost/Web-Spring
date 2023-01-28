@@ -15,12 +15,17 @@ public class PostRepository {
     AtomicLong mapIndex = new AtomicLong();
 
 
-    public ConcurrentHashMap<Long, Post> all() {
-        return repositoryPost;
+    public List<Post> all() {
+       List<Post> rep = new ArrayList<>(repositoryPost.size());
+       for (Post post: repositoryPost.values()
+            ) {
+           rep.add(post);
+       }
+        return rep;
     }
 
     public Optional<Post> getById(long id) {
-        return Optional.of(repositoryPost.get(id));
+        return Optional.ofNullable(repositoryPost.get(id));
     }
 
     public Post save(Post post) {

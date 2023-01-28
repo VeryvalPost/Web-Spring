@@ -1,5 +1,5 @@
 package ru.netology.javaconfig;
-
+/*
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.netology.controller.PostController;
@@ -22,4 +22,4 @@ public class JavaConfig {
     public PostRepository postRepository() {
         return new PostRepository();
     }
-}
+}*/
